@@ -32,9 +32,15 @@ public class PostService {
         Posts post = new Posts();
         post.setUser(user);
         post.setContent(postCreateDTO.getContent());
-
+        post.setUrlImage(postCreateDTO.getUrlImage());
         post = postRepository.save(post);
+
         return new PostDTO(post);
+    }
+
+    public List<PostDTO> getPosts() {
+        List<Posts> posts = postRepository.findAll();
+        return posts.stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
     public PostDTO editPost(PostDTO postDTO, String id) {

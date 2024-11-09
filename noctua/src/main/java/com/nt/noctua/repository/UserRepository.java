@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<ModelUser, Long> {
 
     ModelUser findByUsername(String username);
+    ModelUser findByEmail(String email);
     Boolean existsByUsernameOrEmail(String username, String email);
 
 

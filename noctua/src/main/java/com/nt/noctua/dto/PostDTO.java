@@ -15,6 +15,7 @@ public class PostDTO {
     private Long id;
     private Long userId;
     private String content;
+    private String urlImage;
     private LocalDateTime createdAt;
 
     public PostDTO(Posts post) {
@@ -22,5 +23,6 @@ public class PostDTO {
         this.userId = post.getUser().getId();
         this.content = post.getContent();
         this.createdAt = post.getDate_create();
+        this.urlImage = post.getUrlImage();
     }
 }

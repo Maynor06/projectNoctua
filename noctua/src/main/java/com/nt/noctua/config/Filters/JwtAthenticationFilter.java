@@ -31,12 +31,12 @@ public class JwtAthenticationFilter extends UsernamePasswordAuthenticationFilter
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response){
         ModelUser user = null;
-        String username = "";
+        String email = "";
         String password = "";
 
         try {
             user = new ObjectMapper().readValue(request.getInputStream(), ModelUser.class);
-            username = user.getUsername();
+            email = user.getEmail();
             password = user.getPassword();
 
         } catch (DatabindException e) {
@@ -48,7 +48,7 @@ public class JwtAthenticationFilter extends UsernamePasswordAuthenticationFilter
         }
 
         UsernamePasswordAuthenticationToken authenticationToken;
-        authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+        authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
         return getAuthenticationManager().authenticate(authenticationToken);
     }
 

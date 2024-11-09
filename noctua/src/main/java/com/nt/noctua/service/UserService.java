@@ -4,6 +4,7 @@ import com.nt.noctua.Model.ModelUser;
 import com.nt.noctua.dto.UserDTO;
 import com.nt.noctua.dto.UserRegisterDTO;
 import com.nt.noctua.repository.UserRepository;
+import com.nt.noctua.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     private UserRepository userRepository;
 
@@ -23,7 +27,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDTO registerUser(UserRegisterDTO userRegisterDTO) {
+    public String registerUser(UserRegisterDTO userRegisterDTO) {
         if(userRepository.existsByUsernameOrEmail(userRegisterDTO.getUsername(), userRegisterDTO.getEmail() )){
             throw new IllegalArgumentException("El nombre o email ya estan en uso");
         }
@@ -33,8 +37,9 @@ public class UserService {
         user.setEmail(userRegisterDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
-        user = userRepository.save(user);
-        return new UserDTO(user);
+        String token = jwtUtils.genereteAccesToken(userRegisterDTO.getUsername());
+
+        return token;
     }
 
     public List<UserDTO> getAllUsers() {

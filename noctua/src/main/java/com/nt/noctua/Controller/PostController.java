@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/createPost")
     public ResponseEntity<PostDTO> createPost(@RequestBody PostCreateDTO postCreateDTO){
         PostDTO post = postService.createPost(postCreateDTO);
@@ -31,6 +33,12 @@ public class PostController {
     public ResponseEntity<PostDTO> getPostById(@PathVariable String id){
         PostDTO post = postService.getPostById(id);
         return ResponseEntity.status(HttpStatus.OK).body(post);
+    }
+
+    @GetMapping("/getPosts")
+    public ResponseEntity<List<PostDTO>> getPosts(){
+        List<PostDTO> posts = postService.getPosts();
+        return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
     @GetMapping("/user/{userId}")

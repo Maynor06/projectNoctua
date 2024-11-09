@@ -29,4 +29,6 @@ public class Posts {
     @Column(nullable = false, updatable = false)
     private LocalDateTime date_create = LocalDateTime.now();
 
+    private String urlImage;
+
 }

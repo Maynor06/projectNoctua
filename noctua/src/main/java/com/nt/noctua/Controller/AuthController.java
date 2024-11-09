@@ -34,14 +34,14 @@ public class AuthController {
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequestDTO loginRequestDTO){
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-                loginRequestDTO.getUsername(),
+                loginRequestDTO.getEmail(),
                 loginRequestDTO.getPassword()
         );
 
         try{
             Authentication authenticate = authenticationManager.authenticate(authentication);
 
-            String token = jwtUtils.genereteAccesToken(loginRequestDTO.getUsername());
+            String token = jwtUtils.genereteAccesToken(loginRequestDTO.getEmail());
 
             Map<String, String> response = new HashMap<>();
             response.put("token", token);

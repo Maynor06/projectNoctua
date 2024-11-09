@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -23,9 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody UserRegisterDTO userRegisterDTO){
-        UserDTO userDTO = userService.registerUser(userRegisterDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody UserRegisterDTO userRegisterDTO){
+        String token = userService.registerUser(userRegisterDTO);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(map);
     }
 
     @GetMapping("/getAllUsers")

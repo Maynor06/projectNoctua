@@ -43,9 +43,10 @@ public class PostService {
         return posts.stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
-    public PostDTO editPost(PostDTO postDTO, String id) {
+    public PostDTO editPost(PostCreateDTO postCreateDTO, String id) {
         Posts post = postRepository.findById(Long.parseLong(id) ).orElseThrow(() -> new IllegalArgumentException("post no encontrado"));
-        post.setContent(postDTO.getContent());
+        post.setContent(postCreateDTO.getContent());
+        post.setUrlImage(postCreateDTO.getUrlImage());
         post = postRepository.save(post);
         return new PostDTO(post);
     }

@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public UserDTO getUserByUsername(String username) {
-        ModelUser user = userRepository.findByUsername(username);
+        ModelUser user = userRepository.findByEmail(username);
         if(user == null){
             throw new IllegalArgumentException("usuario no encontrado");
         }

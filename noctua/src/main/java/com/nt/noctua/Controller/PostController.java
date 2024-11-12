@@ -48,8 +48,8 @@ public class PostController {
     }
 
     @PutMapping("/editPost/{id}")
-    public ResponseEntity<PostDTO> editPost(@RequestBody PostDTO postDTO,@PathVariable String id){
-        PostDTO post = postService.editPost(postDTO, id);
+    public ResponseEntity<PostDTO> editPost(@RequestBody PostCreateDTO postCreateDTO,@PathVariable String id){
+        PostDTO post = postService.editPost(postCreateDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }
 

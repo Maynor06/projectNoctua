@@ -66,7 +66,7 @@ Este proyecto combina una serie de herramientas y tecnologías para ofrecer un b
 Si tienes preguntas, sugerencias o estás interesado en colaborar en este proyecto, no dudes en contactarme:  
 
 - **Email**: [TuEmail@ejemplo.com](mailto:dmaynor488@gmail.com)  
-- **LinkedIn**: [TuPerfilLinkedIn](https://www.linkedin.com/in/maynor-semeya)  
+- **LinkedIn**: [Maynor Semeyá](https://www.linkedin.com/in/maynor-semeya)  
 
 ---
 
